@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>
+            Document
+        </title>
+        <style>
+            .main{
+                height:100vh;
+                background-image:url(./image.png);
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+            ul{
+                list-style-type:none;         
+                display: flex;
+                gap:90px;
+                background-color: bisque;
+                margin:0;
+                padding-top:25px;
+                justify-content: center;
+                height:50px;
+                font-size: larger;
+
+            }
+            .box {
+                    height: 500px;
+                    width: 300px;
+                    border: 2px solid black;
+                    background-color: rgba(255, 255, 255, 0.8);
+                    padding: 20px;
+                }
+                .container {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        gap: 20px; 
+                        padding: 50px;
+                }
+
+            .box1{
+                height:500px;
+                width:300px;
+                border:1px solid;
+                position:relative;           
+            }
+            .box2{
+                height:500px;
+                width:300px;
+                border:1px solid;
+                position:absolute;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="main">
+            <ul>
+                <li>Home</li>
+                <li>About me</li>
+                <li>Skill</li>
+                <li>Projects</li>
+                <li>Experience</li>
+            </ul>
+            <div class="container">
+            <div class="box">
+                <h3>Personal Info</h3>
+                <p>Name: deepika</p>
+                <p>Degree: B.Sc. Computer Science</p>
+                <p>Email: deepikadeepz564@gmail.com</p>
+                <p>Phone: 8248671339</p>
+            </div>
+            <div class="box">
+                <h3>More Details</h3>
+                <p>Hobbies: Reading, Coding, Drawing</p>
+                <p>Skills: Python, Java, HTML, CSS</p>
+                <p>Goal: Become a Software Developer</p>
+            </div>
+
+        </div>
+    </body>
+</html>
