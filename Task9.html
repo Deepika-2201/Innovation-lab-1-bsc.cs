@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Form Validator</title>
+
+  <style>
+    body{
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h2>Form Input Validator</h2>
+  <form id="myForm">
+    <div class="input-group">
+      <label>Name:</label>
+      <input type="text" id="name">
+      <p id="nameMsg"></p>
+    </div>
+
+    <div class="input-group">
+      <label>Email:</label>
+      <input type="text" id="email">
+      <p id="emailMsg"></p>
+    </div>
+
+    <div class="input-group">
+      <label>Phone:</label>
+      <input type="text" id="phone">
+      <p id="phoneMsg"></p>
+    </div>
+
+    <div class="input-group">
+      <label>Password:</label>
+      <input type="password" id="password">
+      <p id="passMsg"></p>
+    </div>
+
+    <button type="submit">Submit</button>
+  </form>
+<script>
+  document.getElementById("myForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const nameRegex = /^[A-Za-z ]{3,}$/;
+    const emailRegex = /^[\w.-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,}$/;
+    const phoneRegex = /^\d{10}$/;
+    const passRegex = /^(?=.*[A-Z])(?=.*\d).{6,}$/;
+
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    let phone = document.getElementById("phone").value.replace(/\D/g, "");
+    const password = document.getElementById("password").value.trim();
+
+    function setMessage(id, condition, successMsg, errorMsg) {
+    const msg = document.getElementById(id);
+    msg.textContent = condition ? successMsg : errorMsg;
+    msg.className = condition ? "success" : "error";
+    }
+
+    setMessage("nameMsg", nameRegex.test(name), "Valid Name", "Name must be atleast 3 letters");
+    setMessage("emailMsg", emailRegex.test(email), "Valid Email", "Invalid Email format");
+    setMessage("phoneMsg", phoneRegex.test(phone), "Valid Phone number", "Invalid Phone number");
+    setMessage("passMsg", passRegex.test(password), "Strong Password", "Must be 6+ chars, 1 uppercase, 1 digit");
+
+    if (phoneRegex.test(phone)) {
+    const formatted = phone.replace(/(\d{3})(\d{3})(\d{4})/, "($1) $2-$3");
+    document.getElementById("phone").value = formatted;
+    }
+});
+</script>
+</body>
+</html>
