@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>To-Do List</title>
+  <style>
+    body{
+        text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h2>To-Do List</h2>
+
+  <input type="text" id="taskInput" placeholder="Enter a task...">
+  <button onclick="addTask()">Add</button>
+
+  <ul id="taskList"></ul>
+
+  <script>
+    window.onload = loadTasks;
+
+function addTask() {
+    let input = document.getElementById("taskInput");
+    let taskText = input.value.trim();
+
+    if (taskText === "") return; 
+
+    sessionStorage.setItem("tempTask", taskText);
+
+    let task = { text: taskText, completed: false };
+
+    let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    tasks.push(task);
+
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+
+    input.value = "";
+    sessionStorage.removeItem("tempTask");
+    displayTasks();
+}
+
+function displayTasks() {
+    let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    let list = document.getElementById("taskList");
+    list.innerHTML = "";
+
+    tasks.forEach((task, index) => {
+        let li = document.createElement("li");
+
+        li.textContent = task.text;
+        if (task.completed) li.classList.add("done");
+
+        let doneBtn = document.createElement("button");
+        doneBtn.textContent = " Finished ";
+        doneBtn.onclick = () => markComplete(index);
+
+        let delBtn = document.createElement("button");
+        delBtn.textContent = " Delete ";
+        delBtn.onclick = () => deleteTask(index);
+
+        li.appendChild(doneBtn);
+        li.appendChild(delBtn);
+        list.appendChild(li);
+    });
+}
+
+function markComplete(index) {
+    let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    tasks.splice(index, 1); 
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    displayTasks();
+}
+function deleteTask(index) {
+    let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    tasks.splice(index, 1);
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    displayTasks();
+}
+
+function loadTasks() {
+    let tempTask = sessionStorage.getItem("tempTask");
+    if (tempTask) {
+        document.getElementById("taskInput").value = tempTask;
+    }
+    displayTasks();
+}
+  </script>
+</body>
+</html>
