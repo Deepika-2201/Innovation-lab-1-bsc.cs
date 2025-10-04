@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+class Book {
+  constructor(name, writer, year) {
+    this.name = name;
+    this.writer = writer;
+    this.year = new Date(year); 
+  }
+
+  getSummary() {
+    return `${this.name} was written by ${this.writer} and published in ${this.year.getFullYear()}`;
+  }
+}
+
+
+class EBook extends Book {
+  constructor(name, writer, year, sizeInMB) {
+    super(name, writer, year);
+    this.sizeInMB = sizeInMB;
+  }
+  getSummary() {
+    return `${this.name} was written by ${this.writer} and published in ${this.year.getFullYear()} (Size: ${this.sizeInMB}MB)`;
+  }
+}
+const physicalBook1 = new Book("1984", "George Orwell", "1949-06-08");
+const physicalBook2 = new Book("Pride and Prejudice", "Jane Austen", "1813-01-28");
+
+const digitalBook1 = new EBook("Node.js Guide", "Alex Roe", "2021-10-10", 3);
+const digitalBook2 = new EBook("Mastering CSS", "Lily Chen", "2019-07-01", 4.5);
+console.log(physicalBook1.getSummary());
+console.log(physicalBook2.getSummary());
+
+console.log(digitalBook1.getSummary());
+console.log(digitalBook2.getSummary());
+
+
+class SpecialEBook extends EBook {
+  constructor(name, writer, year, sizeInMB, fileFormat) {
+    super(name, writer, year, sizeInMB); 
+    this.fileFormat = fileFormat;
+  }
+
+  getSummary() {
+    return `${super.getSummary()} [Format: ${this.fileFormat}]`;
+  }
+}
+
+const enhancedEBook = new SpecialEBook("Fullstack Dev", "Morgan Ray", "2024-02-14", 8, "ePub");
+
+console.log(enhancedEBook.getSummary());
+
+    </script>
+  
+    
+
+</body>
+</html>
