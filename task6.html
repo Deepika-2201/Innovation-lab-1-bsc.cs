@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+const contacts = [
+  {
+    name: "Alice",
+    phone: "1234567890",
+    email: "alice@example.com",
+    showInfo() {
+      console.log(`Name: ${this.name}, Phone: ${this.phone}, Email: ${this.email}`);
+    }
+  },
+  {
+    name: "Bob",
+    phone: "9876543210",
+    email: "bob@example.com",
+    showInfo() {
+      console.log(`Name: ${this.name}, Phone: ${this.phone}, Email: ${this.email}`);
+    }
+  }
+];
+
+const displayContact = ({ name, phone, email }) => {
+  console.log(`(Destructured) ${name} - ${phone} - ${email}`);
+};
+displayContact(contacts[0]);
+
+console.log("Dot notation:", contacts[0].name);
+console.log("Bracket notation:", contacts[1]["email"]);
+contacts.forEach(contact => contact.showInfo());
+
+const addMultipleContacts = (...newContacts) => {
+  contacts.push(...newContacts);
+};
+
+addMultipleContacts(
+  {
+    name: "Charlie",
+    phone: "1112223333",
+    email: "charlie@example.com",
+    showInfo() {
+      console.log(`${this.name} - ${this.phone} - ${this.email}`);
+    }
+  },
+  {
+    name: "David",
+    phone: "4445556666",
+    email: "david@example.com",
+    showInfo() {
+      console.log(`${this.name} - ${this.phone} - ${this.email}`);
+    }
+  }
+);
+
+console.log("\nAfter adding new contacts:");
+contacts.forEach(contact => contact.showInfo());
+const additionalContacts = [
+  {
+    name: "Eva",
+    phone: "7778889999",
+    email: "eva@example.com",
+    showInfo() {
+      console.log(`${this.name} - ${this.phone} - ${this.email}`);
+    }
+  }
+];
+
+contacts.push(...additionalContacts);
+
+console.log("\nAfter merging arrays:");
+contacts.forEach(contact => contact.showInfo());
+const contactUtilities = {
+  customDisplay(prefix, suffix) {
+    console.log(`${prefix} ${this.name} - ${this.phone} - ${this.email} ${suffix}`);
+  }
+};
+
+const selectedContact = contacts[0];
+
+contactUtilities.customDisplay.call(selectedContact, ">>", "<<");
+
+contactUtilities.customDisplay.apply(selectedContact, ["[", "]"]);
+
+const boundDisplay = contactUtilities.customDisplay.bind(selectedContact, "START", "END");
+boundDisplay();
+
+    </script>
+</body>
+</html>
