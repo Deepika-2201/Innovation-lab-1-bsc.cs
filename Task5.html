@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <script>
+    // Reverse words in a sentence
+function reverseWords(sentence) {
+    return sentence.split(' ').reverse().join(' ');
+}
+
+let inputSentence = "JavaScript is fun and powerful";
+console.log("Original Sentence:", inputSentence);
+console.log("Reversed Words:", reverseWords(inputSentence));
+
+// Remove duplicates from an array
+function removeDuplicates(arr) {
+    return arr.filter((value, index, self) => self.indexOf(value) === index);
+}
+
+let duplicateArray = [1, 2, 3, 2, 4, 1, 5, 3];
+console.log("Original Array:", duplicateArray);
+console.log("Without Duplicates:", removeDuplicates(duplicateArray));
+
+// Count vowels in a string
+function countVowels(str) {
+    return Array.from(str).filter(char => "aeiouAEIOU".includes(char)).length;
+}
+
+let text = "The quick brown fox jumps over the lazy dog";
+console.log("Text:", text);
+console.log("Vowel Count:", countVowels(text));
+
+   </script> 
+</body>
+</html>
